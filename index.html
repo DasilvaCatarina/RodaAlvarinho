@@ -1,0 +1,47 @@
+<h1>Roleta do Alvarinho 🍇</h1>
+<div id="form-section" class="active">
+  <input type="email" id="email" placeholder="Digite seu e-mail" required>
+  <button onclick="submitEmail()">Participar</button>
+</div>
+<!-- Roleta -->
+<div id="wheel-section">
+  <div id="wheel"></div>
+  <button onclick="spin()">Girar a Roleta</button>
+  <div id="prize"></div>
+</div>
+
+<script>
+  const prizes = [
+    "T-shirt Alvarinho",
+    "Garrafa de Vinho",
+    "Copo Personalizado",
+    "Desconto Especial",
+    "Brinde Surpresa",
+    "Nada dessa vez"
+  ];
+
+  function submitEmail() {
+    const emailInput = document.getElementById('email').value;
+    if (emailInput && emailInput.includes('@')) {
+      console.log('Email recolhido:', emailInput); // <- Aqui você pode salvar localmente ou enviar para servidor
+      document.getElementById('form-section').classList.remove('active');
+      document.getElementById('wheel-section').classList.add('active');
+    } else {
+      alert('Por favor, insira um e-mail válido.');
+    }
+  }
+
+  function spin() {
+    const wheel = document.getElementById('wheel');
+    const randomDegree = Math.floor(5000 + Math.random() * 5000);
+    wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+    const prizeIndex = Math.floor(Math.random() * prizes.length);
+    setTimeout(() => {
+      document.getElementById('prize').textContent = `🎉 Você ganhou: ${prizes[prizeIndex]}!`;
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>
